@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.13.2",
+    "babel-preset-next": "^1.4.0",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "rickmortyapi": "^1.0.0",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@types/react": "17.0.27",
+    "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
