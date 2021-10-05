@@ -7,6 +7,7 @@ body {
   background: #202022;
 
   font-family: 'Noto Sans KR', sans-serif;
+  font-size: 18px;
 }
 
 a {
@@ -22,7 +23,7 @@ a {
 :root {
   --black: #202022;
   --white: rgb(240, 245, 247);
-  --black-hover: #423561;
+  --black-hover: #312f33;
   --gray-ligth: #ebebeb;
   --gray: #e2e2e2;
   --primary: #7351f5;

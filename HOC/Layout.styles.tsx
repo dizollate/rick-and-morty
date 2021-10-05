@@ -12,4 +12,9 @@ export const Wrapper = styled.div`
 
 export const Content = styled.div`
   min-height: calc(100vh - 200px);
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `

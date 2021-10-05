@@ -23,9 +23,10 @@ export const HeaderWrapper = styled.header`
 export const LogoImage = styled(Image)`
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
   :hover {
     transform: scale(1.1);
+    border-radius: 0;
   }
 `
 
