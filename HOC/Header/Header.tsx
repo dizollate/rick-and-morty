@@ -6,12 +6,20 @@ import {
 } from './Header.styles'
 import Logo from '../../public/favicon.jpeg'
 import Link from 'next/link'
+import { useRouter } from 'next/dist/client/router'
 
 const Header = (): JSX.Element => {
+  const router = useRouter()
   return (
     <HeaderStyles>
       <HeaderWrapper>
-        <LogoImage src={Logo} height="70px" width="70px" alt="logo" />
+        <LogoImage
+          src={Logo}
+          height="70px"
+          width="70px"
+          alt="logo"
+          onClick={() => router.push('/')}
+        />
         <LinkWrapper>
           <Link href="/characters">
             <a>Characters</a>

@@ -3,34 +3,37 @@ import { WithLayout } from '../HOC/Layout'
 import { ContentBox, ContentBoxText, MockImage } from './home.style'
 
 import mockImg from '../public/favicon.jpeg'
+import { useRouter } from 'next/dist/client/router'
 
 const HomeData = [
   {
     photo: 'url',
     title: 'Characters',
     text: 'It is page about this',
-    _id: '14i2i4h12o14',
+    _id: 'characters',
   },
   {
     photo: 'url',
     title: 'Characters',
     text: 'It is page about this',
-    _id: '14i2i4h12os4',
+    _id: 'chapters',
   },
   {
     photo: 'url',
     title: 'Characters',
     text: 'It is page about this',
-    _id: '14i2i4s12o14',
+    _id: 'episodes',
   },
 ]
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
   return (
     <>
       {HomeData.map((i) => {
         return (
-          <ContentBox key={i._id}>
+          <ContentBox key={i._id} onClick={() => router.push(`/${i._id}`)}>
             <MockImage src={mockImg} alt="mock" width="150px" height="150px" />
             <ContentBoxText>{i.title}</ContentBoxText>
           </ContentBox>
