@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import { WithLayout } from '../HOC/Layout'
-import { ContentBox, ContentBoxText, MockImage } from './home.style'
+import { ContentBox, ContentBoxText, MockImage } from '../styles/home.style'
 
 import mockImg from '../public/favicon.jpeg'
 import { useRouter } from 'next/dist/client/router'

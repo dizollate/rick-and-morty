@@ -9,8 +9,8 @@ import {
   WrapperContent,
   LocationCharacter,
   BoxWrapper,
-} from './Characters.styles'
-import { ICharacter, IInfo } from './CharactersInterfaces'
+} from '../../styles/Characters.styles'
+import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
