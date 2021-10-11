@@ -1,70 +1,88 @@
-import { useState } from 'react'
-import { getCharacter } from 'rickmortyapi'
+import { useEffect, useState } from 'react'
+import { getCharacters } from 'rickmortyapi'
 import { WithLayout } from '../../HOC/Layout'
 import {
   CharacterBox,
   ImageCharacter,
+  NameCharacter,
   WrapperCharacters,
+  WrapperContent,
+  LocationCharacter,
+  BoxWrapper,
 } from './Characters.styles'
-import { ICharacter } from './CharactersInterfaces'
-import { GetStaticProps } from 'next'
+import { ICharacter, IInfo } from './CharactersInterfaces'
 
-const Characters = ({ characters }: TypeProps) => {
-  const [charactersOnPage] = useState<ICharacter[]>(characters)
+const Characters = () => {
+  const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
+  const [infoPage, setInfoPage] = useState<IInfo>()
+  const [page, setPage] = useState<number>(1)
 
-  console.log(charactersOnPage)
-
-  if (charactersOnPage) {
-    return (
-      <WrapperCharacters>
-        {charactersOnPage.map((i: ICharacter) => {
-          return (
-            <CharacterBox key={i.id}>
-              <ImageCharacter
-                src={i.image}
-                alt={`avatar of ${i.name}`}
-                width="100%"
-                height="90%"
-                layout="responsive"
-                objectFit="cover"
-              />
-              <span>{i.name}</span>
-            </CharacterBox>
-          )
-        })}
-      </WrapperCharacters>
-    )
-  } else {
-    return <></>
-  }
-}
-
-export const getStaticProps: GetStaticProps<TypeProps> = async () => {
-  const limitCharacters = 15
-  const getArrayCharacters: number[] = []
-
-  for (let i = limitCharacters - 14; i <= limitCharacters; i++) {
-    getArrayCharacters.push(i)
-  }
-  try {
-    const charactersOnPage = await getCharacter(getArrayCharacters)
+  useEffect(() => {
+    getCharacters({ page: page })
       .then((response) => {
-        return response.data
+        setCharacterOnPage(response.data.results)
+        setInfoPage(response.data.info)
       })
       .catch((e) => {
         console.log(e.message)
         return []
       })
-    return { props: { characters: charactersOnPage } }
-  } catch (e) {
-    return {
-      notFound: true,
-    }
-  }
-}
+  }, [page])
 
-interface TypeProps extends Record<string, unknown> {
-  characters: ICharacter[]
+  if (charactersOnPage) {
+    return (
+      <WrapperCharacters>
+        {infoPage?.count && (
+          <div style={{ marginBottom: '10px' }}>
+            Number of all characters: {infoPage.count}
+          </div>
+        )}
+        <BoxWrapper>
+          {charactersOnPage.map((i: ICharacter) => {
+            return (
+              <CharacterBox key={i.id}>
+                <ImageCharacter
+                  src={i.image}
+                  alt={`avatar of ${i.name}`}
+                  width={'100%'}
+                  height="100%"
+                  objectFit="cover"
+                />
+                <WrapperContent>
+                  <NameCharacter>{i.name}</NameCharacter>
+                  <LocationCharacter>
+                    Location: {i.location.name}
+                  </LocationCharacter>
+                  <LocationCharacter>Gender: {i.gender}</LocationCharacter>
+                  <LocationCharacter>Created: {i.created}</LocationCharacter>
+                </WrapperContent>
+              </CharacterBox>
+            )
+          })}
+        </BoxWrapper>
+        {infoPage && (
+          <>
+            <div style={{ display: 'flex', alignSelf: 'center' }}>
+              <button
+                disabled={infoPage.prev === null}
+                onClick={() => setPage((prev) => prev - 1)}
+              >
+                Prev
+              </button>
+              <button
+                disabled={infoPage.next === null}
+                onClick={() => setPage((prev) => prev + 1)}
+              >
+                Next
+              </button>
+            </div>
+          </>
+        )}
+      </WrapperCharacters>
+    )
+  } else {
+    return <></>
+  }
 }
 
 export default WithLayout(Characters)

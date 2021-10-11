@@ -18,3 +18,10 @@ export interface ICharacter {
   type?: string
   url: string
 }
+
+export interface IInfo {
+  count: number
+  next: string | null
+  pages: number
+  prev: string | null
+}
