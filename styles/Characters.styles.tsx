@@ -65,3 +65,30 @@ export const LocationCharacter = styled.span`
     color: var(--numeric);
   }
 `
+export const ButtonOFpage = styled.button`
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: var(--black-hover);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 18px;
+  border: none;
+  transition: all 0.4s ease;
+  :hover {
+    background: var(--white);
+    color: var(--black-hover);
+  }
+  :disabled {
+    background: var(--gray-dark);
+    color: var(--black);
+    cursor: default;
+  }
+`
+export const WrapperButton = styled.div`
+  display: flex;
+  align-self: center;
+  margin-top: 10px;
+  button:nth-child(2) {
+    margin-left: 10px;
+  }
+`

@@ -9,6 +9,8 @@ import {
   WrapperContent,
   LocationCharacter,
   BoxWrapper,
+  ButtonOFpage,
+  WrapperButton,
 } from '../../styles/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 
@@ -44,8 +46,8 @@ const Characters = () => {
                 <ImageCharacter
                   src={i.image}
                   alt={`avatar of ${i.name}`}
-                  width={'100%'}
-                  height="100%"
+                  width={'100'}
+                  height={'100'}
                   objectFit="cover"
                 />
                 <WrapperContent>
@@ -62,20 +64,26 @@ const Characters = () => {
         </BoxWrapper>
         {infoPage && (
           <>
-            <div style={{ display: 'flex', alignSelf: 'center' }}>
-              <button
+            <WrapperButton>
+              <ButtonOFpage
                 disabled={infoPage.prev === null}
-                onClick={() => setPage((prev) => prev - 1)}
+                onClick={() => {
+                  setPage((prev) => prev - 1)
+                  window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
+                }}
               >
                 Prev
-              </button>
-              <button
+              </ButtonOFpage>
+              <ButtonOFpage
                 disabled={infoPage.next === null}
-                onClick={() => setPage((prev) => prev + 1)}
+                onClick={() => {
+                  setPage((prev) => prev + 1)
+                  window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
+                }}
               >
                 Next
-              </button>
-            </div>
+              </ButtonOFpage>
+            </WrapperButton>
           </>
         )}
       </WrapperCharacters>
