@@ -11,7 +11,7 @@ import {
   BoxWrapper,
   ButtonOFpage,
   WrapperButton,
-} from '../../styles/Characters.styles'
+} from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 
 const Characters = () => {
