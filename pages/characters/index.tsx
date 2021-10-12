@@ -13,11 +13,13 @@ import {
   WrapperButton,
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
+import { useRouter } from 'next/dist/client/router'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
   const [infoPage, setInfoPage] = useState<IInfo>()
   const [page, setPage] = useState<number>(1)
+  const router = useRouter()
 
   useEffect(() => {
     getCharacters({ page: page })
@@ -42,7 +44,10 @@ const Characters = () => {
         <BoxWrapper>
           {charactersOnPage.map((i: ICharacter) => {
             return (
-              <CharacterBox key={i.id}>
+              <CharacterBox
+                key={i.id}
+                onClick={() => router.push(`/characters/${i.id}`)}
+              >
                 <ImageCharacter
                   src={i.image}
                   alt={`avatar of ${i.name}`}
