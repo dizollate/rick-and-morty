@@ -15,7 +15,7 @@ export interface ICharacter {
   }
   species: string
   status: string
-  type?: string
+  type: string
   url: string
 }
 
@@ -24,4 +24,14 @@ export interface IInfo {
   next: string | null
   pages: number
   prev: string | null
+}
+
+export interface IEpisode {
+  air_date: string
+  characters: string[]
+  created: string
+  episode: string
+  id: number
+  name: string
+  url: string
 }
