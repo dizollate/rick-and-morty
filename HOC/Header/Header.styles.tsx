@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Image from 'next/image'
 
 export const HeaderStyles = styled.header`
   width: 100%;
@@ -20,13 +19,25 @@ export const HeaderWrapper = styled.header`
   justify-content: space-between;
 `
 
-export const LogoImage = styled(Image)`
-  border-radius: 50%;
+export const LogoImage = styled.img`
+  width: 100%;
+  height: 100%;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
+`
+export const WrapperLogoImg = styled.div`
+  width: 70px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  :hover ${LogoImage} {
+    transform: scale(1.2);
+  }
   :hover {
-    transform: scale(1.1);
-    border-radius: 0;
+    transform: scale(0.95);
+    box-shadow: 1px 1px 1px #8f8f8f;
   }
 `
 
@@ -39,6 +50,6 @@ export const LinkWrapper = styled.div`
     transition: all 0.3s ease;
   }
   a:hover {
-    color: var(--numeric);
+    color: var(--light-hover);
   }
 `

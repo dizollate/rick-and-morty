@@ -52,7 +52,7 @@ export const NameCharacter = styled.span`
   align-self: center;
   transition: all 0.4s ease;
   ${CharacterBox}:hover & {
-    color: var(--numeric);
+    color: var(--light-hover);
   }
 `
 
@@ -62,7 +62,7 @@ export const LocationCharacter = styled.span`
   margin-bottom: 10px;
   transition: all 0.4s ease;
   :hover {
-    color: var(--numeric);
+    color: var(--light-hover);
   }
 `
 export const ButtonOFpage = styled.button`

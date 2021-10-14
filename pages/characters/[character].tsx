@@ -66,6 +66,7 @@ const Character = () => {
             height="200px"
             objectFit="cover"
             alt={character.name}
+            priority={true}
           ></CharacterImage>
           <WrapperHeaderTitle>
             <CharacterTitleName>{character.name}</CharacterTitleName>

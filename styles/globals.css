@@ -37,5 +37,6 @@ a {
   --medium-font: 16px;
   --large-font: 18px;
   --gray-dark: #3a3d42;
-  --numeric: #f08d49;
+  --light-hover: #f08d49;
+  --dark-hover: #ece49c;
 }

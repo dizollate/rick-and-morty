@@ -3,8 +3,8 @@ import {
   HeaderWrapper,
   LinkWrapper,
   LogoImage,
+  WrapperLogoImg,
 } from './Header.styles'
-import Logo from '../../public/favicon.jpeg'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 
@@ -13,13 +13,13 @@ const Header = (): JSX.Element => {
   return (
     <HeaderStyles>
       <HeaderWrapper>
-        <LogoImage
-          src={Logo}
-          height="70px"
-          width="70px"
-          alt="logo"
-          onClick={() => router.push('/')}
-        />
+        <WrapperLogoImg>
+          <LogoImage
+            src="/favicon.jpeg"
+            alt="logo"
+            onClick={() => router.push('/')}
+          />
+        </WrapperLogoImg>
         <LinkWrapper>
           <Link href="/characters">
             <a>Characters</a>

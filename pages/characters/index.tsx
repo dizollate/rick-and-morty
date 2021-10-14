@@ -54,6 +54,7 @@ const Characters = () => {
                   width={'100'}
                   height={'100'}
                   objectFit="cover"
+                  priority={true}
                 />
                 <WrapperContent>
                   <NameCharacter>{i.name}</NameCharacter>

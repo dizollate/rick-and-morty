@@ -17,7 +17,7 @@ export const FooterWrapper = styled.footer`
       transition: all 0.3s ease;
     }
     a:hover {
-      color: var(--numeric);
+      color: var(--light-hover);
       transform: scale(1.02);
     }
   }

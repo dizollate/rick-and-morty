@@ -58,7 +58,7 @@ export const Status = styled.span`
   margin-right: 20px;
   transition: all 0.4s ease;
   :hover {
-    color: var(--numeric);
+    color: var(--light-hover);
   }
 `
 export const Circle = styled.span`
