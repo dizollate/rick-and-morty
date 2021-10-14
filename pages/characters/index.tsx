@@ -14,11 +14,13 @@ import {
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 import { useRouter } from 'next/dist/client/router'
+import { motion } from 'framer-motion'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
   const [infoPage, setInfoPage] = useState<IInfo>()
   const [page, setPage] = useState<number>(1)
+
   const router = useRouter()
 
   useEffect(() => {
@@ -34,7 +36,12 @@ const Characters = () => {
   }, [page])
 
   return (
-    <WrapperCharacters>
+    <WrapperCharacters
+      as={motion.div}
+      transition={{ ease: 'easeOut', duration: 0.5 }}
+      initial={{ x: '-150%' }}
+      animate={{ x: 0 }}
+    >
       {infoPage?.count && (
         <div style={{ marginBottom: '10px' }}>
           Number of all characters: {infoPage.count}

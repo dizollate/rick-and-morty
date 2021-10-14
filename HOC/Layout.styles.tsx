@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 `
 
 export const Content = styled.div`
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 100px);
   width: 100%;
   max-width: 1100px;
   display: flex;

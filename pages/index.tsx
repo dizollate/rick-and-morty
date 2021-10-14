@@ -10,6 +10,8 @@ import {
 } from '../styles/HomePage/home.style'
 
 import { useRouter } from 'next/dist/client/router'
+import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const HomeData = [
   {
@@ -34,12 +36,26 @@ const HomeData = [
 
 const Home: NextPage = () => {
   const router = useRouter()
+  const [xValue, setXValue] = useState<number | string>(0)
+
+  const onNewPage = (id?: string) => {
+    setXValue('150%')
+    setTimeout(() => {
+      router.push(`/${id}`)
+    }, 700)
+  }
 
   return (
     <WrapperHome>
       {HomeData.map((i) => {
         return (
-          <ContentBox key={i._id} onClick={() => router.push(`/${i._id}`)}>
+          <ContentBox
+            as={motion.div}
+            transition={{ ease: 'easeIn', duration: 0.5 }}
+            animate={{ x: xValue }}
+            key={i._id}
+            onClick={() => onNewPage(i._id)}
+          >
             <WrapperImageHome>
               <MockImage src={i.photo} alt="mock" />
             </WrapperImageHome>
