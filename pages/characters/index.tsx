@@ -33,16 +33,16 @@ const Characters = () => {
       })
   }, [page])
 
-  if (charactersOnPage) {
-    return (
-      <WrapperCharacters>
-        {infoPage?.count && (
-          <div style={{ marginBottom: '10px' }}>
-            Number of all characters: {infoPage.count}
-          </div>
-        )}
-        <BoxWrapper>
-          {charactersOnPage.map((i: ICharacter) => {
+  return (
+    <WrapperCharacters>
+      {infoPage?.count && (
+        <div style={{ marginBottom: '10px' }}>
+          Number of all characters: {infoPage.count}
+        </div>
+      )}
+      <BoxWrapper>
+        {charactersOnPage &&
+          charactersOnPage.map((i: ICharacter) => {
             return (
               <CharacterBox
                 key={i.id}
@@ -67,36 +67,33 @@ const Characters = () => {
               </CharacterBox>
             )
           })}
-        </BoxWrapper>
-        {infoPage && (
-          <>
-            <WrapperButton>
-              <ButtonOFpage
-                disabled={infoPage.prev === null}
-                onClick={() => {
-                  setPage((prev) => prev - 1)
-                  window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
-                }}
-              >
-                Prev
-              </ButtonOFpage>
-              <ButtonOFpage
-                disabled={infoPage.next === null}
-                onClick={() => {
-                  setPage((prev) => prev + 1)
-                  window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
-                }}
-              >
-                Next
-              </ButtonOFpage>
-            </WrapperButton>
-          </>
-        )}
-      </WrapperCharacters>
-    )
-  } else {
-    return <></>
-  }
+      </BoxWrapper>
+      {infoPage && (
+        <>
+          <WrapperButton>
+            <ButtonOFpage
+              disabled={infoPage.prev === null}
+              onClick={() => {
+                setPage((prev) => prev - 1)
+                window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
+              }}
+            >
+              Prev
+            </ButtonOFpage>
+            <ButtonOFpage
+              disabled={infoPage.next === null}
+              onClick={() => {
+                setPage((prev) => prev + 1)
+                window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
+              }}
+            >
+              Next
+            </ButtonOFpage>
+          </WrapperButton>
+        </>
+      )}
+    </WrapperCharacters>
+  )
 }
 
 export default WithLayout(Characters)

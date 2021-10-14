@@ -40,7 +40,16 @@ export const ContentBoxText = styled.span`
     color: var(--dark-hover);
   }
 `
-
+export const ContextSubTitle = styled.span`
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  font-size: 25px;
+  transition: all 0.4s ease;
+  text-shadow: 1px 1px 1px #000;
+  opacity: 0;
+  z-index: 10;
+`
 export const ContentBox = styled.div`
   transition: all 0.5s ease;
   border-radius: 15px;
@@ -61,5 +70,9 @@ export const ContentBox = styled.div`
   :hover ${ContentBoxText} {
     text-shadow: 3px 3px 3px #000;
     transform: scale(1.02);
+  }
+  :hover ${ContextSubTitle} {
+    opacity: 1;
+    top: 60%;
   }
 `

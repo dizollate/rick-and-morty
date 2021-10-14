@@ -3,6 +3,7 @@ import { WithLayout } from '../HOC/Layout'
 import {
   ContentBox,
   ContentBoxText,
+  ContextSubTitle,
   MockImage,
   WrapperHome,
   WrapperImageHome,
@@ -14,19 +15,19 @@ const HomeData = [
   {
     photo: '/mortyCar.jpeg',
     title: 'Characters',
-    text: 'It is page about this',
+    text: 'Learn new about the characters?',
     _id: 'characters',
   },
   {
     photo: '/mortyAdv.jpeg',
     title: 'Episodes',
-    text: 'It is page about this',
+    text: 'Wanna know about all episodes?',
     _id: 'episodes',
   },
   {
     photo: '/smth.png',
     title: 'Locations',
-    text: 'It is page about this',
+    text: 'Where your favourite character now?',
     _id: 'location',
   },
 ]
@@ -43,6 +44,7 @@ const Home: NextPage = () => {
               <MockImage src={i.photo} alt="mock" />
             </WrapperImageHome>
             <ContentBoxText>{i.title}</ContentBoxText>
+            <ContextSubTitle>{i.text}</ContextSubTitle>
           </ContentBox>
         )
       })}
