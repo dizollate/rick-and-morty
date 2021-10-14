@@ -1,24 +1,18 @@
 import styled from 'styled-components'
 
 export const FooterWrapper = styled.footer`
-  width: 100%;
+  width: 95%;
   height: 100px;
-  background-color: var(--white);
-  color: var(--black);
+  color: var(--white);
   display: flex;
-  justify-content: center;
-  border-radius: 15px 15px 0 0;
-  div {
-    display: flex;
-    align-items: center;
-    max-width: 600px;
-    a {
-      margin-right: 20px;
-      transition: all 0.3s ease;
-    }
-    a:hover {
-      color: var(--light-hover);
-      transform: scale(1.02);
-    }
+  justify-content: space-around;
+  align-items: center;
+  display: flex;
+  border-top: 2px solid var(--white);
+  a {
+    transition: all 0.3s ease;
+  }
+  a:hover {
+    color: var(--light-hover);
   }
 `
