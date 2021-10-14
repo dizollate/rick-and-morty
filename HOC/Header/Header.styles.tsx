@@ -22,6 +22,7 @@ export const HeaderWrapper = styled.header`
 export const LogoImage = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
   cursor: pointer;
   transition: all 0.5s ease;
 `
@@ -33,7 +34,7 @@ export const WrapperLogoImg = styled.div`
   border-radius: 50%;
   overflow: hidden;
   :hover ${LogoImage} {
-    transform: scale(1.2);
+    transform: scale(1.45);
   }
   :hover {
     transform: scale(0.95);
@@ -47,9 +48,14 @@ export const LinkWrapper = styled.div`
   max-width: 600px;
   a {
     margin-left: 40px;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    background-image: linear-gradient(var(--light-hover), var(--light-hover));
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: all 0.3s ease-out;
   }
   a:hover {
-    color: var(--light-hover);
+    background-size: 100% 2px;
   }
 `
