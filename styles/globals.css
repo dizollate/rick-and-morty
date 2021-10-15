@@ -23,7 +23,7 @@ a {
 :root {
   --black: #202022;
   --white: rgb(240, 245, 247);
-  --black-hover: #312f33;
+  --black-hover: linear-gradient(270deg, rgb(43, 43, 43), rgb(40, 39, 46));
   --gray-ligth: #ebebeb;
   --gray: #e2e2e2;
   --primary: #7351f5;

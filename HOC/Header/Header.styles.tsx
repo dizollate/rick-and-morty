@@ -8,6 +8,7 @@ export const HeaderStyles = styled.header`
   display: flex;
   justify-content: center;
   border-radius: 0 0 15px 15px;
+  z-index: 10;
 `
 
 export const HeaderWrapper = styled.header`

@@ -63,6 +63,8 @@ export const ContentBox = styled.div`
   margin-bottom: 30px;
   position: relative;
   transition: all 0.4s ease;
+  box-shadow: 5px 5px 5px #000000;
+  z-index: 9;
   :hover ${MockImage} {
     transform: scale(1.05);
     opacity: 0.6;

@@ -11,6 +11,7 @@ import {
   BoxWrapper,
   ButtonOFpage,
   WrapperButton,
+  AllCharacter,
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 import { useRouter } from 'next/dist/client/router'
@@ -22,6 +23,19 @@ const Characters = () => {
   const [page, setPage] = useState<number>(1)
 
   const router = useRouter()
+
+  const item = {
+    opened: {
+      opacity: 1,
+    },
+    closed: {
+      transition: {
+        ease: 'easeOut',
+        duration: 0.5,
+      },
+      opacity: 0,
+    },
+  }
 
   useEffect(() => {
     getCharacters({ page: page })
@@ -36,24 +50,26 @@ const Characters = () => {
   }, [page])
 
   return (
-    <WrapperCharacters
-      as={motion.div}
-      transition={{ ease: 'easeOut', duration: 0.5 }}
-      initial={{ x: '-150%' }}
-      animate={{ x: 0 }}
-    >
+    <WrapperCharacters>
       {infoPage?.count && (
-        <div style={{ marginBottom: '10px' }}>
-          Number of all characters: {infoPage.count}
-        </div>
+        <AllCharacter>
+          Number of all characters: <span>{infoPage.count}</span>
+        </AllCharacter>
       )}
-      <BoxWrapper>
+      <BoxWrapper as={motion.div} initial="closed" animate="opened" layout>
         {charactersOnPage &&
           charactersOnPage.map((i: ICharacter) => {
             return (
               <CharacterBox
+                as={motion.div}
+                variants={item}
                 key={i.id}
-                onClick={() => router.push(`/characters/${i.id}`)}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                  setTimeout(() => {
+                    router.push(`/characters/${i.id}`)
+                  }, 500)
+                }}
               >
                 <ImageCharacter
                   src={i.image}

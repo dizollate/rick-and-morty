@@ -7,6 +7,17 @@ export const WrapperCharacters = styled.div`
   display: flex;
   flex-direction: column;
 `
+
+export const AllCharacter = styled.div`
+  margin-bottom: 25px;
+  span {
+    transition: all 0.4s ease;
+  }
+  span:hover {
+    color: var(--light-hover);
+  }
+`
+
 export const BoxWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -27,8 +38,10 @@ export const CharacterBox = styled.div`
   transition: all 0.4s ease;
   transform: scale(1);
   text-align: center;
+  box-shadow: 5px 5px 5px #000000;
   :hover {
     transform: scale(1.1);
+    box-shadow: 10px 10px 10px #000000;
   }
   @media screen and (max-width: 940px) {
     width: 100%;
@@ -68,15 +81,16 @@ export const LocationCharacter = styled.span`
 export const ButtonOFpage = styled.button`
   padding: 10px 20px;
   border-radius: 5px;
-  background: var(--black-hover);
+  background-color: var(--black-hover);
+  box-shadow: 2px 2px 5px #000;
   color: var(--white);
   cursor: pointer;
   font-size: 18px;
   border: none;
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
   :hover {
-    background: var(--white);
-    color: var(--black-hover);
+    background-color: var(--white);
+    color: var(--black);
   }
   :disabled {
     background: var(--gray-dark);

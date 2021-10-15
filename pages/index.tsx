@@ -52,7 +52,8 @@ const Home: NextPage = () => {
           <ContentBox
             as={motion.div}
             transition={{ ease: 'easeIn', duration: 0.5 }}
-            animate={{ x: xValue }}
+            initial={{ y: '-300%', opacity: 0 }}
+            animate={{ x: xValue, y: 0, opacity: 1 }}
             key={i._id}
             onClick={() => onNewPage(i._id)}
           >
