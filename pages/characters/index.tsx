@@ -16,13 +16,49 @@ import {
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 import { useRouter } from 'next/dist/client/router'
 import { motion } from 'framer-motion'
+import { pageNumberFromString } from '../../helpers/pageNumberString'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
   const [infoPage, setInfoPage] = useState<IInfo>()
   const [page, setPage] = useState<number>(1)
-
+  const [arrayOfPageNumbers, setArrayOfPageNumbers] =
+    useState<(string | number | undefined)[]>()
   const router = useRouter()
+
+  useEffect(() => {
+    const arr = []
+
+    if (infoPage?.pages) {
+      console.log(infoPage.pages)
+      console.log(page)
+      if (page < 9) {
+        for (let i = 1; i <= 8; i++) {
+          arr.push(i)
+        }
+        arr.push('..+')
+        arr.push(infoPage?.pages)
+      } else if (page + 6 >= infoPage!.pages) {
+        console.log('2 variant')
+        arr.push(1)
+        arr.push('-..')
+        console.log(arr)
+        for (let i = infoPage!.pages - 6; i <= infoPage!.pages; i++) {
+          arr.push(i)
+        }
+        console.log(arr)
+      } else {
+        arr.push(1)
+        arr.push('-..')
+        for (let i = page - 2; i <= page + 3; i++) {
+          arr.push(i)
+        }
+        arr.push('..+')
+        arr.push(infoPage?.pages)
+      }
+    }
+    setArrayOfPageNumbers(arr)
+  }, [infoPage?.next, infoPage?.pages])
 
   const item = {
     opened: {
@@ -103,6 +139,44 @@ const Characters = () => {
             >
               Prev
             </ButtonOFpage>
+            {arrayOfPageNumbers &&
+              arrayOfPageNumbers.map((i) => {
+                return (
+                  <ButtonOFpage
+                    key={i}
+                    disabled={
+                      infoPage.next
+                        ? i === pageNumberFromString(infoPage.next)
+                        : i == infoPage.pages && infoPage.next === null
+                        ? true
+                        : false
+                    }
+                    onClick={() => {
+                      if (i == '..+') {
+                        setPage(
+                          Number(
+                            arrayOfPageNumbers[arrayOfPageNumbers.length - 3]
+                          ) + 1
+                        )
+                      } else if (i == '-..') {
+                        setPage(Number(arrayOfPageNumbers[2]) - 1)
+                      } else {
+                        setPage(Number(i))
+                      }
+                      window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
+                    }}
+                    active={
+                      infoPage.next
+                        ? i === pageNumberFromString(infoPage.next)
+                        : i == infoPage.pages && infoPage.next === null
+                        ? true
+                        : false
+                    }
+                  >
+                    {i}
+                  </ButtonOFpage>
+                )
+              })}
             <ButtonOFpage
               disabled={infoPage.next === null}
               onClick={() => {
