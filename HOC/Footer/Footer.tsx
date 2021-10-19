@@ -5,7 +5,10 @@ const Footer = (): JSX.Element => {
     <FooterWrapper>
       <span>Rick and Morty</span>
       <span>
-        Сreated by <a href="https://github.com/dizollate">@dizollate</a>
+        Сreated by{' '}
+        <a target="_blank" href="https://github.com/dizollate" rel="noreferrer">
+          @dizollate
+        </a>
       </span>
     </FooterWrapper>
   )

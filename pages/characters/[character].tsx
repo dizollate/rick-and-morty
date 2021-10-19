@@ -25,6 +25,7 @@ import {
 } from '../../styles/Character/Character.style'
 import { pageNumberFromString } from '../../helpers/pageNumberString'
 import { Episode } from 'rickmortyapi/dist/interfaces'
+import { AnimatePresence, motion } from 'framer-motion'
 
 const Character = () => {
   const router = useRouter()
@@ -34,6 +35,25 @@ const Character = () => {
   const [oneEpisode, setOneEpisode] = useState<Episode>()
   const [showMore, setShowMore] = useState<boolean>(false)
   const [imageSize, setImageSize] = useState<boolean>(false)
+
+  const transition = {
+    duration: 0.4,
+    delay: 0.2,
+    ease: 'easeInOut',
+  }
+
+  const variants = {
+    hidden: {
+      scale: 0,
+      opacity: 0,
+      transition,
+    },
+    show: {
+      scale: 1,
+      opacity: 1,
+      transition,
+    },
+  }
 
   useEffect(() => {
     setId(Number(router.query.character))
@@ -64,7 +84,7 @@ const Character = () => {
       }
     }
   }, [character])
-  console.log(episodes)
+
   useEffect(() => {
     if (id) {
       getCharacter(id)
@@ -79,105 +99,103 @@ const Character = () => {
   }, [id])
 
   return (
-    <WrapperCharacter>
-      {character && (
-        <>
-          <WrapperHeader>
-            <WrapperCharacterImage
-              onClick={() => setImageSize(!imageSize)}
-              imageSize={imageSize}
-            >
-              <CharacterImage
-                src={character.image}
-                alt={character.name}
-              ></CharacterImage>
-            </WrapperCharacterImage>
-            <WrapperHeaderTitle>
-              <CharacterTitleName>{character.name}</CharacterTitleName>
-              <CreatedTime>
-                Date of Created: {character.created.slice(0, 10)}
-              </CreatedTime>
-              <WrapperStatus>
-                <Status>Status: {character.status}</Status>
-                {character.status == 'Alive' ? (
-                  <Circle color={'var(--green-ligth)'} />
-                ) : character.status == 'Dead' ? (
-                  <Circle />
-                ) : null}
-              </WrapperStatus>
-            </WrapperHeaderTitle>
-          </WrapperHeader>
-          <WrapperContentCharacter>
-            <EpisodesTitle>
-              Episodes with <span>{character.name}</span>
-            </EpisodesTitle>
-            <WrapperCharacterEpisodesBoxes>
-              {episodes && episodes.length > 9 && !showMore
-                ? episodes.slice(0, 9).map((item, i) => {
-                    return (
-                      <BoxCharacterEpisodes key={i}>
-                        <span>{item.name}</span>
-                        <span>{item.episode}</span>
-                      </BoxCharacterEpisodes>
-                    )
-                  })
-                : episodes && episodes.length > 9 && showMore
-                ? episodes.map((item, i) => {
-                    return (
-                      <BoxCharacterEpisodes key={i}>
-                        <span>{item.name}</span>
-                        <span>{item.episode}</span>
-                      </BoxCharacterEpisodes>
-                    )
-                  })
-                : episodes && episodes.length > 0
-                ? episodes.map((item, i) => {
-                    return (
-                      <BoxCharacterEpisodes key={i}>
-                        <span>{item.name}</span>
-                        <span>{item.episode}</span>
-                      </BoxCharacterEpisodes>
-                    )
-                  })
-                : oneEpisode && (
-                    <BoxCharacterEpisodes>
-                      <span>{oneEpisode.name}</span>
-                      <span>{oneEpisode.episode}</span>
-                    </BoxCharacterEpisodes>
-                  )}
-            </WrapperCharacterEpisodesBoxes>
-            {episodes && episodes.length > 9 && (
-              <ButtonShowMore onClick={() => setShowMore(!showMore)}>
-                {!showMore ? 'Show More' : 'Hide'}
-              </ButtonShowMore>
-            )}
-          </WrapperContentCharacter>
-          <WrapperAnotherInfo>
-            <EpisodesTitle>
-              <span>Another info of</span> {character.name}
-            </EpisodesTitle>
-            <AnotherTextWrapper>
-              <AnotherText>
-                <span>Location:</span> {character.location.name}
-              </AnotherText>
-              <AnotherText>
-                <span>Origin:</span> {character.origin.name}
-              </AnotherText>
-              <AnotherText>
-                <span>Gender:</span> {character.gender}
-              </AnotherText>
-              {character.type && (
-                <AnotherText>
-                  <span>Type:</span> {character.type}
-                </AnotherText>
+    <WrapperCharacter
+      as={motion.div}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+      variants={variants}
+    >
+      <AnimatePresence>
+        {character && (
+          <>
+            <WrapperHeader>
+              <WrapperCharacterImage
+                onClick={() => setImageSize(!imageSize)}
+                imageSize={imageSize}
+              >
+                <CharacterImage
+                  src={character.image}
+                  alt={character.name}
+                ></CharacterImage>
+              </WrapperCharacterImage>
+              <WrapperHeaderTitle>
+                <CharacterTitleName>{character.name}</CharacterTitleName>
+                <CreatedTime>
+                  Date of Created: {character.created.slice(0, 10)}
+                </CreatedTime>
+                <WrapperStatus>
+                  <Status>Status: {character.status}</Status>
+                  {character.status == 'Alive' ? (
+                    <Circle color={'var(--green-ligth)'} />
+                  ) : character.status == 'Dead' ? (
+                    <Circle />
+                  ) : null}
+                </WrapperStatus>
+              </WrapperHeaderTitle>
+            </WrapperHeader>
+            <WrapperContentCharacter>
+              <EpisodesTitle>
+                Episodes with <span>{character.name}</span>
+              </EpisodesTitle>
+              <WrapperCharacterEpisodesBoxes>
+                <AnimatePresence>
+                  {episodes && episodes.length !== 0
+                    ? episodes.map((item, i) => {
+                        let active = true
+                        if (i >= 9 && !showMore) {
+                          active = false
+                        } else if (i >= 9 && showMore) {
+                          active = true
+                        }
+                        return (
+                          <BoxCharacterEpisodes key={i} active={active}>
+                            <span>{item.name}</span>
+                            <span>{item.episode}</span>
+                          </BoxCharacterEpisodes>
+                        )
+                      })
+                    : oneEpisode && (
+                        <BoxCharacterEpisodes active={true}>
+                          <span>{oneEpisode.name}</span>
+                          <span>{oneEpisode.episode}</span>
+                        </BoxCharacterEpisodes>
+                      )}
+                </AnimatePresence>
+              </WrapperCharacterEpisodesBoxes>
+              {episodes && episodes.length > 9 && (
+                <ButtonShowMore onClick={() => setShowMore(!showMore)}>
+                  {!showMore ? 'Show More' : 'Hide'}
+                </ButtonShowMore>
               )}
-              <AnotherText>
-                <span>Species:</span> {character.species}
-              </AnotherText>
-            </AnotherTextWrapper>
-          </WrapperAnotherInfo>
-        </>
-      )}
+            </WrapperContentCharacter>
+            <WrapperAnotherInfo>
+              <EpisodesTitle>
+                <span>Another info of</span> {character.name}
+              </EpisodesTitle>
+              <AnotherTextWrapper>
+                <AnotherText>
+                  <span>Location:</span> {character.location.name}
+                </AnotherText>
+                <AnotherText>
+                  <span>Origin:</span> {character.origin.name}
+                </AnotherText>
+                <AnotherText>
+                  <span>Gender:</span> {character.gender}
+                </AnotherText>
+                {character.type && (
+                  <AnotherText>
+                    <span>Type:</span> {character.type}
+                  </AnotherText>
+                )}
+                <AnotherText>
+                  <span>Species:</span> {character.species}
+                </AnotherText>
+              </AnotherTextWrapper>
+            </WrapperAnotherInfo>
+          </>
+        )}
+      </AnimatePresence>
     </WrapperCharacter>
   )
 }

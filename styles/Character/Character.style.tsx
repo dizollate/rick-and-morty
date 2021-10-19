@@ -111,17 +111,20 @@ export const WrapperCharacterEpisodesBoxes = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 `
-export const BoxCharacterEpisodes = styled.div`
+export const BoxCharacterEpisodes = styled.div<{ active: boolean }>`
   width: 30%;
   background-color: var(--black-hover);
-  box-shadow: 2px 2px 5px #000;
-  margin-bottom: 20px;
+  box-shadow: ${(p) => (p.active ? '2px 2px 5px #000' : 'none')};
+  margin-bottom: ${(p) => (p.active ? '20px' : '0')};
+  height: ${(p) => (p.active ? 'auto' : '0')};
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px;
+  opacity: ${(p) => (p.active ? '1' : '0')};
+  visibility: ${(p) => (p.active ? 'visible' : 'hidden')};
+  padding: ${(p) => (p.active ? '20px' : '0')};
   cursor: pointer;
   transition: all 0.4s ease;
 
