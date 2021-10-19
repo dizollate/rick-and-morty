@@ -38,12 +38,12 @@ const Characters = () => {
         }
         arr.push('..+')
         arr.push(infoPage?.pages)
-      } else if (page + 6 >= infoPage!.pages) {
+      } else if (page + 6 >= infoPage.pages) {
         console.log('2 variant')
         arr.push(1)
         arr.push('-..')
         console.log(arr)
-        for (let i = infoPage!.pages - 6; i <= infoPage!.pages; i++) {
+        for (let i = infoPage.pages - 6; i <= infoPage.pages; i++) {
           arr.push(i)
         }
         console.log(arr)
