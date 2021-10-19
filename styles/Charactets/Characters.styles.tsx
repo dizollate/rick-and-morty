@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export const WrapperCharacters = styled.div`
   width: 100%;
-  padding: 50px 50px;
   display: flex;
+  padding: 50px 0;
   flex-direction: column;
 `
 

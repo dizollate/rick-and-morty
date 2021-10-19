@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Image from 'next/image'
 
 export const WrapperCharacter = styled.div`
   width: 100%;
@@ -11,18 +10,32 @@ export const WrapperHeader = styled.header`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   border-bottom: 2px solid var(--gray);
+  position: relative;
 `
-export const CharacterImage = styled(Image)`
-  border-radius: 15px;
-  margin: 0;
-  padding: 0;
-  cursor: pointer;
+
+export const WrapperCharacterImage = styled.div<{ imageSize: boolean }>`
+  position: absolute;
+
+  width: ${(p) => (p.imageSize ? '100%' : '150px')};
+  height: 200px;
+  z-index: ${(p) => (p.imageSize ? '1' : '3')};
+  filter: blur(${(p) => (p.imageSize ? '3px' : '0')});
+  opacity: ${(p) => (p.imageSize ? '0.7' : '1')};
   transition: all 0.4s ease;
+  cursor: pointer;
   :hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
+`
+
+export const CharacterImage = styled.img`
+  width: 100%;
+  height: 100%;
+  box-shadow: 2px 2px 2px #000;
+  border-radius: 15px;
+  object-fit: cover;
 `
 
 export const CharacterTitleName = styled.div`
@@ -30,6 +43,7 @@ export const CharacterTitleName = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
   margin-top: -10px;
+  z-index: 2;
 `
 
 export const WrapperHeaderTitle = styled.div`
@@ -44,12 +58,14 @@ export const CreatedTime = styled.div`
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 10px;
+  z-index: 2;
 `
 
 export const WrapperStatus = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 `
 
 export const Status = styled.span`
@@ -132,9 +148,12 @@ export const ButtonShowMore = styled.button`
   cursor: pointer;
   font-size: 18px;
   border: none;
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
   margin: 0 4px;
   align-self: center;
+  :hover {
+    transform: scale(1.1);
+  }
 `
 export const WrapperAnotherInfo = styled.div`
   width: 100%;

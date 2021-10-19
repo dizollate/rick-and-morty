@@ -17,6 +17,7 @@ import {
   WrapperAnotherInfo,
   WrapperCharacter,
   WrapperCharacterEpisodesBoxes,
+  WrapperCharacterImage,
   WrapperContentCharacter,
   WrapperHeader,
   WrapperHeaderTitle,
@@ -32,6 +33,7 @@ const Character = () => {
   const [episodes, setEpisodes] = useState<Episode[]>()
   const [oneEpisode, setOneEpisode] = useState<Episode>()
   const [showMore, setShowMore] = useState<boolean>(false)
+  const [imageSize, setImageSize] = useState<boolean>(false)
 
   useEffect(() => {
     setId(Number(router.query.character))
@@ -81,14 +83,15 @@ const Character = () => {
       {character && (
         <>
           <WrapperHeader>
-            <CharacterImage
-              src={character.image}
-              width="150px"
-              height="200px"
-              objectFit="cover"
-              alt={character.name}
-              priority={true}
-            ></CharacterImage>
+            <WrapperCharacterImage
+              onClick={() => setImageSize(!imageSize)}
+              imageSize={imageSize}
+            >
+              <CharacterImage
+                src={character.image}
+                alt={character.name}
+              ></CharacterImage>
+            </WrapperCharacterImage>
             <WrapperHeaderTitle>
               <CharacterTitleName>{character.name}</CharacterTitleName>
               <CreatedTime>
