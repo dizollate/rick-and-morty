@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { getCharacters } from 'rickmortyapi'
 import { WithLayout } from '../../HOC/Layout'
 import {
@@ -12,6 +12,11 @@ import {
   ButtonOFpage,
   WrapperButton,
   AllCharacter,
+  Form,
+  Input,
+  Button,
+  CharactersHeader,
+  SearchImg,
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 import { useRouter } from 'next/dist/client/router'
@@ -24,14 +29,27 @@ const Characters = () => {
   const [page, setPage] = useState<number>(1)
   const [arrayOfPageNumbers, setArrayOfPageNumbers] =
     useState<(string | number | undefined)[]>()
+  const [input, setInput] = useState('')
+  const [barOpened, setBarOpened] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
+
+  const formRef = useRef<HTMLDivElement>(null)
+  const inputFocus = useRef<HTMLDivElement>(null)
+
   const router = useRouter()
+
+  const onFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSearchValue(input)
+    setPage(1)
+    setInput('')
+    setBarOpened(false)
+  }
+  console.log(infoPage)
 
   useEffect(() => {
     const arr = []
-
-    if (infoPage?.pages) {
-      console.log(infoPage.pages)
-      console.log(page)
+    if (infoPage?.pages && infoPage?.pages > 9) {
       if (page < 9) {
         for (let i = 1; i <= 8; i++) {
           arr.push(i)
@@ -39,7 +57,6 @@ const Characters = () => {
         arr.push('..+')
         arr.push(infoPage?.pages)
       } else if (page + 6 >= infoPage.pages) {
-        console.log('2 variant')
         arr.push(1)
         arr.push('-..')
         console.log(arr)
@@ -55,6 +72,12 @@ const Characters = () => {
         }
         arr.push('..+')
         arr.push(infoPage?.pages)
+      }
+    } else {
+      if (infoPage?.pages) {
+        for (let i = 1; i <= infoPage?.pages; i++) {
+          arr.push(i)
+        }
       }
     }
     setArrayOfPageNumbers(arr)
@@ -74,7 +97,7 @@ const Characters = () => {
   }
 
   useEffect(() => {
-    getCharacters({ page: page })
+    getCharacters({ page: page, name: searchValue })
       .then((response) => {
         setCharacterOnPage(response.data.results)
         setInfoPage(response.data.info)
@@ -83,15 +106,43 @@ const Characters = () => {
         console.log(e.message)
         return []
       })
-  }, [page])
+  }, [page, searchValue])
 
   return (
     <WrapperCharacters>
-      {infoPage?.count && (
+      <CharactersHeader>
         <AllCharacter>
-          Number of all characters: <span>{infoPage.count}</span>
+          Characters: <span>{infoPage?.count ? infoPage.count : 0}</span>
         </AllCharacter>
-      )}
+        <Form
+          barOpened={barOpened}
+          onClick={() => {
+            setBarOpened(true)
+            inputFocus.current!.focus()
+          }}
+          onFocus={() => {
+            setBarOpened(true)
+            inputFocus.current!.focus()
+          }}
+          onBlur={() => {
+            setBarOpened(false)
+          }}
+          onSubmit={onFormSubmit}
+          ref={formRef as any}
+        >
+          <Button type="submit" barOpened={barOpened}>
+            <SearchImg src="/search.png" alt="search"></SearchImg>
+          </Button>
+          <Input
+            onChange={(e) => setInput(e.target.value)}
+            ref={inputFocus as any}
+            value={input}
+            barOpened={barOpened}
+            placeholder="Search for a character..."
+          />
+        </Form>
+      </CharactersHeader>
+
       <BoxWrapper as={motion.div} initial="closed" animate="opened" layout>
         {charactersOnPage &&
           charactersOnPage.map((i: ICharacter) => {
@@ -145,7 +196,9 @@ const Characters = () => {
                   <ButtonOFpage
                     key={i}
                     disabled={
-                      infoPage.next
+                      infoPage.next && infoPage.prev == null
+                        ? i === 1
+                        : infoPage.next
                         ? i === pageNumberFromString(infoPage.next)
                         : i == infoPage.pages && infoPage.next === null
                         ? true
@@ -166,7 +219,9 @@ const Characters = () => {
                       window.scrollTo({ top: 100, left: 0, behavior: 'smooth' })
                     }}
                     active={
-                      infoPage.next
+                      infoPage.next && infoPage.prev == null
+                        ? i === 1
+                        : infoPage.next
                         ? i === pageNumberFromString(infoPage.next)
                         : i == infoPage.pages && infoPage.next === null
                         ? true
