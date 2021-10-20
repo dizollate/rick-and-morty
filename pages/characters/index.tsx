@@ -17,11 +17,19 @@ import {
   Button,
   CharactersHeader,
   SearchImg,
+  WrapperCharacterFilter,
+  Select,
+  SelectWrapper,
+  ResetButton,
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
 import { useRouter } from 'next/dist/client/router'
 import { motion } from 'framer-motion'
 import { pageNumberFromString } from '../../helpers/pageNumberString'
+import {
+  optionsSortingByGender,
+  optionsSortingByStatus,
+} from '../../helpers/optionsSorting'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
@@ -32,6 +40,8 @@ const Characters = () => {
   const [input, setInput] = useState('')
   const [barOpened, setBarOpened] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [genderSortValue, setGenderSortValue] = useState('')
+  const [statusSortValue, setStatusSortValue] = useState('')
 
   const formRef = useRef<HTMLDivElement>(null)
   const inputFocus = useRef<HTMLDivElement>(null)
@@ -45,7 +55,6 @@ const Characters = () => {
     setInput('')
     setBarOpened(false)
   }
-  console.log(infoPage)
 
   useEffect(() => {
     const arr = []
@@ -59,11 +68,9 @@ const Characters = () => {
       } else if (page + 6 >= infoPage.pages) {
         arr.push(1)
         arr.push('-..')
-        console.log(arr)
         for (let i = infoPage.pages - 6; i <= infoPage.pages; i++) {
           arr.push(i)
         }
-        console.log(arr)
       } else {
         arr.push(1)
         arr.push('-..')
@@ -97,7 +104,12 @@ const Characters = () => {
   }
 
   useEffect(() => {
-    getCharacters({ page: page, name: searchValue })
+    getCharacters({
+      page: page,
+      name: searchValue,
+      status: statusSortValue,
+      gender: genderSortValue,
+    })
       .then((response) => {
         setCharacterOnPage(response.data.results)
         setInfoPage(response.data.info)
@@ -106,7 +118,7 @@ const Characters = () => {
         console.log(e.message)
         return []
       })
-  }, [page, searchValue])
+  }, [page, searchValue, statusSortValue, genderSortValue])
 
   return (
     <WrapperCharacters>
@@ -114,35 +126,82 @@ const Characters = () => {
         <AllCharacter>
           Characters: <span>{infoPage?.count ? infoPage.count : 0}</span>
         </AllCharacter>
-        <Form
-          barOpened={barOpened}
-          onClick={() => {
-            setBarOpened(true)
-            inputFocus.current!.focus()
-          }}
-          onFocus={() => {
-            setBarOpened(true)
-            inputFocus.current!.focus()
-          }}
-          onBlur={() => {
-            setBarOpened(false)
-          }}
-          onSubmit={onFormSubmit}
-          ref={formRef as any}
-        >
-          <Button type="submit" barOpened={barOpened}>
-            <SearchImg src="/search.png" alt="search"></SearchImg>
-          </Button>
-          <Input
-            onChange={(e) => setInput(e.target.value)}
-            ref={inputFocus as any}
-            value={input}
+        <WrapperCharacterFilter>
+          <ResetButton
+            onClick={() => {
+              setPage(1)
+              setGenderSortValue('')
+              setStatusSortValue('')
+              setSearchValue('')
+            }}
+          >
+            Reset
+          </ResetButton>
+          <SelectWrapper>
+            <span>Sort by gender</span>
+            <Select
+              value={genderSortValue}
+              onChange={(e) => {
+                setGenderSortValue(e.target.value)
+                setPage(1)
+              }}
+            >
+              {optionsSortingByGender.map((item, i) => {
+                return (
+                  <option key={i} value={item.value}>
+                    {item.label}
+                  </option>
+                )
+              })}
+            </Select>
+          </SelectWrapper>
+          <SelectWrapper>
+            <span>Sort by status</span>
+            <Select
+              value={statusSortValue}
+              onChange={(e) => {
+                setStatusSortValue(e.target.value)
+                setPage(1)
+              }}
+            >
+              {optionsSortingByStatus.map((item, i) => {
+                return (
+                  <option key={i} value={item.value}>
+                    {item.label}
+                  </option>
+                )
+              })}
+            </Select>
+          </SelectWrapper>
+          <Form
             barOpened={barOpened}
-            placeholder="Search for a character..."
-          />
-        </Form>
+            onClick={() => {
+              setBarOpened(true)
+              inputFocus.current!.focus()
+            }}
+            onFocus={() => {
+              setBarOpened(true)
+              inputFocus.current!.focus()
+            }}
+            onBlur={() => {
+              setBarOpened(false)
+            }}
+            onSubmit={onFormSubmit}
+            ref={formRef as any}
+          >
+            <Button type="submit" barOpened={barOpened}>
+              <SearchImg src="/search.png" alt="search"></SearchImg>
+            </Button>
+            <Input
+              onChange={(e) => setInput(e.target.value)}
+              ref={inputFocus as any}
+              value={input}
+              barOpened={barOpened}
+              placeholder="Search for a character..."
+            />
+          </Form>
+        </WrapperCharacterFilter>
       </CharactersHeader>
-
       <BoxWrapper as={motion.div} initial="closed" animate="opened" layout>
         {charactersOnPage &&
           charactersOnPage.map((i: ICharacter) => {

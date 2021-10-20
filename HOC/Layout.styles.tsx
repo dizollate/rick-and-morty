@@ -31,7 +31,9 @@ export const BackLinkText = styled.span`
 `
 
 export const BackLinkWrapper = styled.span`
-  width: 1100px;
+  padding: 0 50px;
+  max-width: 1200px;
+  width: -webkit-fill-available;
   display: flex;
   margin-top: 20px;
   align-items: center;
