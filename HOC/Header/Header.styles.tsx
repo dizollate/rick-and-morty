@@ -25,22 +25,15 @@ export const LogoImage = styled.img`
   height: 100%;
   object-fit: cover;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 `
 export const WrapperLogoImg = styled.div`
   width: 70px;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
   height: 70px;
   border-radius: 50%;
   overflow: hidden;
-  :hover ${LogoImage} {
-    transform: scale(1.45);
-  }
-  :hover {
-    transform: scale(0.95);
-    box-shadow: 1px 1px 1px #8f8f8f;
-  }
 `
 
 export const LinkWrapper = styled.div`

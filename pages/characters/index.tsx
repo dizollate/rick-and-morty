@@ -63,21 +63,21 @@ const Characters = () => {
         for (let i = 1; i <= 8; i++) {
           arr.push(i)
         }
-        arr.push('..+')
+        arr.push('>>')
         arr.push(infoPage?.pages)
       } else if (page + 6 >= infoPage.pages) {
         arr.push(1)
-        arr.push('-..')
+        arr.push('<<')
         for (let i = infoPage.pages - 6; i <= infoPage.pages; i++) {
           arr.push(i)
         }
       } else {
         arr.push(1)
-        arr.push('-..')
+        arr.push('<<')
         for (let i = page - 2; i <= page + 3; i++) {
           arr.push(i)
         }
-        arr.push('..+')
+        arr.push('>>')
         arr.push(infoPage?.pages)
       }
     } else {
@@ -264,13 +264,13 @@ const Characters = () => {
                         : false
                     }
                     onClick={() => {
-                      if (i == '..+') {
+                      if (i == '>>') {
                         setPage(
                           Number(
                             arrayOfPageNumbers[arrayOfPageNumbers.length - 3]
                           ) + 1
                         )
-                      } else if (i == '-..') {
+                      } else if (i == '<<') {
                         setPage(Number(arrayOfPageNumbers[2]) - 1)
                       } else {
                         setPage(Number(i))

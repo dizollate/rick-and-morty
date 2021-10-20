@@ -68,6 +68,8 @@ export const Select = styled.select`
   color: var(--black);
   border-radius: 15px;
   margin-top: 5px;
+  border: none;
+  cursor: pointer;
 `
 
 export const SelectWrapper = styled.div`
