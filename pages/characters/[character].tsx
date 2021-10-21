@@ -200,4 +200,4 @@ const Character = () => {
   )
 }
 
-export default WithLayout(Character)
+export default WithLayout(Character, '/characters')

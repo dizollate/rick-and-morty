@@ -43,8 +43,8 @@ const Characters = () => {
   const [genderSortValue, setGenderSortValue] = useState('')
   const [statusSortValue, setStatusSortValue] = useState('')
 
-  const formRef = useRef<HTMLDivElement>(null)
-  const inputFocus = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+  const inputFocus = useRef<HTMLInputElement>(null)
 
   const router = useRouter()
 
@@ -88,7 +88,7 @@ const Characters = () => {
       }
     }
     setArrayOfPageNumbers(arr)
-  }, [infoPage?.next, infoPage?.pages])
+  }, [infoPage?.next, infoPage?.pages, page])
 
   const item = {
     opened: {
@@ -177,24 +177,24 @@ const Characters = () => {
             barOpened={barOpened}
             onClick={() => {
               setBarOpened(true)
-              inputFocus.current!.focus()
+              inputFocus.current?.focus()
             }}
             onFocus={() => {
               setBarOpened(true)
-              inputFocus.current!.focus()
+              inputFocus.current?.focus()
             }}
             onBlur={() => {
               setBarOpened(false)
             }}
             onSubmit={onFormSubmit}
-            ref={formRef as any}
+            ref={formRef}
           >
             <Button type="submit" barOpened={barOpened}>
               <SearchImg src="/search.png" alt="search"></SearchImg>
             </Button>
             <Input
               onChange={(e) => setInput(e.target.value)}
-              ref={inputFocus as any}
+              ref={inputFocus}
               value={input}
               barOpened={barOpened}
               placeholder="Search for a character..."
@@ -307,4 +307,4 @@ const Characters = () => {
   )
 }
 
-export default WithLayout(Characters)
+export default WithLayout(Characters, '/')

@@ -12,7 +12,7 @@ import {
   LinkBackContent,
 } from './Layout.styles'
 
-const Layout = ({ children }: ILayout): JSX.Element => {
+const Layout = ({ children, path }: ILayout): JSX.Element => {
   const bodyRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
@@ -21,7 +21,9 @@ const Layout = ({ children }: ILayout): JSX.Element => {
       <Header />
       {router.asPath !== '/' && (
         <BackLinkWrapper>
-          <LinkBackContent onClick={() => router.back()}>
+          <LinkBackContent
+            onClick={() => (path ? router.push(path) : router.back())}
+          >
             <BackArrow></BackArrow>
             <BackLinkText>Back</BackLinkText>
           </LinkBackContent>
@@ -36,11 +38,12 @@ const Layout = ({ children }: ILayout): JSX.Element => {
 }
 
 export const WithLayout = <T extends Record<string, unknown>>(
-  Component: FunctionComponent<T>
+  Component: FunctionComponent<T>,
+  path?: string
 ) => {
   return function withLayoutComponent(props: T): JSX.Element {
     return (
-      <Layout>
+      <Layout path={path}>
         <Component {...props} />
       </Layout>
     )
