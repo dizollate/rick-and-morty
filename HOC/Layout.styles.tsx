@@ -19,6 +19,9 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media screen and (max-width: 570px) {
+    padding: 0 20px;
+  }
 `
 export const BackLinkText = styled.span`
   cursor: pointer;
@@ -38,6 +41,9 @@ export const BackLinkWrapper = styled.span`
   display: flex;
   margin-top: 20px;
   align-items: center;
+  @media screen and (max-width: 570px) {
+    padding: 0 20px;
+  }
 `
 
 export const BackArrow = styled.span`

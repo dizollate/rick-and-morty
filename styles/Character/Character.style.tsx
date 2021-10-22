@@ -65,6 +65,7 @@ export const WrapperHeaderTitle = styled.div`
   transition: all 0.4s ease;
   @media screen and (max-width: 1024px) {
     align-items: center;
+    text-align: center;
   }
 `
 
@@ -154,6 +155,12 @@ export const BoxCharacterEpisodes = styled.div<{ active: boolean }>`
   }
   :hover {
     transform: scale(1.1);
+  }
+  @media screen and (max-width: 768px) {
+    width: 47%;
+  }
+  @media screen and (max-width: 570px) {
+    width: 100%;
   }
 `
 export const ButtonShowMore = styled.button`

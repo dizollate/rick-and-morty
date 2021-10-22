@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Image from 'next/image'
 
 export const CharacterBoxWrapper = styled.div`
   width: 48%;
@@ -24,11 +23,26 @@ export const CharacterBoxWrapper = styled.div`
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
+  @media screen and (max-width: 510px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
-export const ImageCharacter = styled(Image)`
+export const ImageCharacter = styled.img`
   border-radius: 15px;
+  width: 100%;
+  object-fit: cover;
+`
+
+export const ImageCharacterWrapper = styled.div`
+  align-self: center;
+  margin: auto 0;
   grid-column: start / center;
+  @media screen and (max-width: 510px) {
+    margin: auto 0;
+  }
 `
 
 export const WrapperContent = styled.div`
@@ -36,6 +50,9 @@ export const WrapperContent = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 10px;
+  @media screen and (max-width: 1024px) {
+    justify-content: center;
+  }
 `
 
 export const NameCharacter = styled.span`

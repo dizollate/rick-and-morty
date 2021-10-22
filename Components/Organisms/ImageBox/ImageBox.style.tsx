@@ -31,6 +31,12 @@ export const ContentBoxText = styled.span`
   :hover {
     color: var(--dark-hover);
   }
+  @media screen and (max-width: 768px) {
+    font-size: 40px;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 30px;
+  }
 `
 export const ContextSubTitle = styled.span`
   position: absolute;
@@ -41,6 +47,9 @@ export const ContextSubTitle = styled.span`
   text-shadow: 1px 1px 1px #000;
   opacity: 0;
   z-index: 10;
+  @media screen and (max-width: 500px) {
+    font-size: 15px;
+  }
 `
 export const ContentBox = styled.div`
   transition: all 0.5s ease;
@@ -68,5 +77,11 @@ export const ContentBox = styled.div`
   :hover ${ContextSubTitle} {
     opacity: 1;
     top: 60%;
+  }
+  @media screen and (max-width: 768px) {
+    height: 300px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 200px;
   }
 `

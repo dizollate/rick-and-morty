@@ -5,6 +5,7 @@ import {
   LocationCharacter,
   NameCharacter,
   WrapperContent,
+  ImageCharacterWrapper,
 } from './CharacterBox.style'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/dist/client/router'
@@ -37,14 +38,10 @@ const CharacterBox = ({ item }: CharacterBoxProps): JSX.Element => {
         }, 500)
       }}
     >
-      <ImageCharacter
-        src={item.image}
-        alt={`avatar of ${item.name}`}
-        width={'100'}
-        height={'100'}
-        objectFit="cover"
-        priority={true}
-      />
+      <ImageCharacterWrapper>
+        <ImageCharacter src={item.image} alt={`avatar of ${item.name}`} />
+      </ImageCharacterWrapper>
+
       <WrapperContent>
         <NameCharacter>{item.name}</NameCharacter>
         <LocationCharacter>Location: {item.location.name}</LocationCharacter>

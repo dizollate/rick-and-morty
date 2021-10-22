@@ -15,4 +15,7 @@ export const FooterWrapper = styled.footer`
   a:hover {
     color: var(--light-hover);
   }
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+  }
 `

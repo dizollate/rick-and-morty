@@ -81,7 +81,7 @@ export const MenuBurger = styled.div<{ active: boolean }>`
   border-radius: 5px;
   position: fixed;
   top: 30px;
-  right: 30px;
+  right: 20px;
   background-color: var(--white);
   align-items: center;
   justify-content: center;
