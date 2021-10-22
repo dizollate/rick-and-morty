@@ -7,9 +7,9 @@ export const Form = styled.form<{ barOpened: boolean }>`
   justify-content: center;
   box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
   background-color: var(--white);
-  width: ${(props) => (props.barOpened ? '300px' : '30px')};
+  width: ${(props) => (props.barOpened ? '240px' : '30px')};
   cursor: ${(props) => (props.barOpened ? 'auto' : 'pointer')};
-  padding: 25px;
+  padding: 20px;
   align-items: center;
   height: 30px;
   border-radius: 10rem;

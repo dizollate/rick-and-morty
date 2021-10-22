@@ -7,6 +7,9 @@ export const WrapperCharacters = styled.div`
   padding: 50px 0;
   flex-direction: column;
   align-self: baseline;
+  @media screen and (max-width: 1024px) {
+    padding: 20px 0;
+  }
 `
 
 export const WrapperCharacterFilter = styled.div`
@@ -14,6 +17,13 @@ export const WrapperCharacterFilter = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
 `
 
 export const ResetButton = styled(ButtonShowMore)`
@@ -22,6 +32,10 @@ export const ResetButton = styled(ButtonShowMore)`
   margin-right: 10px;
   background-color: var(--white);
   font-size: 18px;
+  @media screen and (max-width: 1024px) {
+    align-self: initial;
+    margin-top: 15px;
+  }
 `
 
 export const AllCharacter = styled.div`
@@ -31,6 +45,10 @@ export const AllCharacter = styled.div`
   span:hover {
     color: var(--light-hover);
   }
+  @media screen and (max-width: 1024px) {
+    margin-bottom: 20px;
+    align-self: center;
+  }
 `
 export const CharactersHeader = styled.div`
   width: 100%;
@@ -38,6 +56,10 @@ export const CharactersHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-end;
+  }
 `
 export const BoxWrapper = styled.div`
   display: flex;

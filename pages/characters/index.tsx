@@ -19,6 +19,7 @@ import CharacterBox from '../../Components/Organisms/CharacterBox/CharacterBox'
 import Pagination from '../../Components/Organisms/Pagination/Pagination'
 import Select from '../../Components/Molecules/Select/Select'
 import SearchBar from '../../Components/Molecules/SearchBar/SearchBar'
+import { paginationLogic } from '../../helpers/paginationLogic'
 
 const Characters = () => {
   const [charactersOnPage, setCharacterOnPage] = useState<ICharacter[]>()
@@ -44,54 +45,27 @@ const Characters = () => {
   }
 
   useEffect(() => {
-    const arr = []
-    if (infoPage?.pages && infoPage?.pages > 9) {
-      if (page < 9) {
-        for (let i = 1; i <= 8; i++) {
-          arr.push(i)
-        }
-        arr.push('>>')
-        arr.push(infoPage?.pages)
-      } else if (page + 6 >= infoPage.pages) {
-        arr.push(1)
-        arr.push('<<')
-        for (let i = infoPage.pages - 6; i <= infoPage.pages; i++) {
-          arr.push(i)
-        }
-      } else {
-        arr.push(1)
-        arr.push('<<')
-        for (let i = page - 2; i <= page + 3; i++) {
-          arr.push(i)
-        }
-        arr.push('>>')
-        arr.push(infoPage?.pages)
-      }
-    } else {
-      if (infoPage?.pages) {
-        for (let i = 1; i <= infoPage?.pages; i++) {
-          arr.push(i)
-        }
-      }
+    let arr
+    if (infoPage?.pages) {
+      arr = paginationLogic(infoPage.pages, page)
     }
     setArrayOfPageNumbers(arr)
   }, [infoPage?.next, infoPage?.pages, page])
 
   useEffect(() => {
-    getCharacters({
-      page: page,
-      name: searchValue,
-      status: statusSortValue,
-      gender: genderSortValue,
-    })
-      .then((response) => {
+    ;(async () => {
+      const response = await getCharacters({
+        page: page,
+        name: searchValue,
+        status: statusSortValue,
+        gender: genderSortValue,
+      })
+
+      if (response) {
         setCharacterOnPage(response.data.results)
         setInfoPage(response.data.info)
-      })
-      .catch((error) => {
-        throw error
-        return []
-      })
+      }
+    })()
   }, [page, searchValue, statusSortValue, genderSortValue])
 
   return (

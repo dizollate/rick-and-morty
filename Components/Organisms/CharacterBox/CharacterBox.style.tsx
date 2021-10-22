@@ -21,7 +21,7 @@ export const CharacterBoxWrapper = styled.div`
     transform: scale(1.1);
     box-shadow: 10px 10px 10px #000000;
   }
-  @media screen and (max-width: 940px) {
+  @media screen and (max-width: 1024px) {
     width: 100%;
   }
 `

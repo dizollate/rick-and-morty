@@ -20,9 +20,16 @@ export const ButtonOFpage = styled.button<{ active?: boolean }>`
     color: ${(p) => (p.active ? 'var(--light-hover)' : 'var(--black)')};
     cursor: default;
   }
+  @media screen and (max-width: 1024px) {
+    margin: 4px 4px;
+  }
 `
 export const WrapperButton = styled.div`
   display: flex;
   align-self: center;
   margin-top: 10px;
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 `

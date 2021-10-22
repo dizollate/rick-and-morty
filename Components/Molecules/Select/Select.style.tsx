@@ -17,4 +17,8 @@ export const SelectWrapper = styled.div`
   span {
     font-size: 14px;
   }
+  @media screen and (max-width: 1024px) {
+    margin-top: 0;
+    width: 240px;
+  }
 `
