@@ -13,6 +13,10 @@ export const WrapperHeader = styled.header`
   padding-bottom: 50px;
   border-bottom: 2px solid var(--gray);
   position: relative;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const WrapperCharacterImage = styled.div<{ imageSize: boolean }>`
@@ -27,6 +31,13 @@ export const WrapperCharacterImage = styled.div<{ imageSize: boolean }>`
   cursor: pointer;
   :hover {
     transform: scale(1.1);
+  }
+  @media screen and (max-width: 1024px) {
+    position: relative;
+    margin-bottom: 20px;
+    width: 200px;
+    filter: blur(0);
+    opacity: 1;
   }
 `
 
@@ -50,8 +61,11 @@ export const WrapperHeaderTitle = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   transition: all 0.4s ease;
+  @media screen and (max-width: 1024px) {
+    align-items: center;
+  }
 `
 
 export const CreatedTime = styled.div`
