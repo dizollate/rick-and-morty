@@ -4,13 +4,17 @@ import {
   LinkWrapper,
   LogoImage,
   WrapperLogoImg,
+  MenuBurger,
+  LineMenuBurger,
 } from './Header.styles'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
 import { motion } from 'framer-motion'
+import { useState } from 'react'
 
 const Header = (): JSX.Element => {
   const router = useRouter()
+  const [active, setActive] = useState<boolean>(false)
   return (
     <HeaderStyles>
       <HeaderWrapper>
@@ -36,7 +40,10 @@ const Header = (): JSX.Element => {
             onClick={() => router.push('/')}
           />
         </WrapperLogoImg>
-        <LinkWrapper>
+        <MenuBurger active={active} onClick={() => setActive(!active)}>
+          <LineMenuBurger active={active} />
+        </MenuBurger>
+        <LinkWrapper active={active}>
           <Link href="/characters">
             <a>Characters</a>
           </Link>
