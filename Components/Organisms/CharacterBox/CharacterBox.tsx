@@ -1,3 +1,6 @@
+import { useRouter } from 'next/dist/client/router'
+import { motion } from 'framer-motion'
+
 import { CharacterBoxProps } from './CharacterBox.props'
 import {
   CharacterBoxWrapper,
@@ -7,8 +10,6 @@ import {
   WrapperContent,
   ImageCharacterWrapper,
 } from './CharacterBox.style'
-import { motion } from 'framer-motion'
-import { useRouter } from 'next/dist/client/router'
 
 const CharacterBox = ({ item }: CharacterBoxProps): JSX.Element => {
   const router = useRouter()

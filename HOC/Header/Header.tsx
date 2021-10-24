@@ -1,3 +1,8 @@
+import { useState } from 'react'
+import { useRouter } from 'next/dist/client/router'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
 import {
   HeaderStyles,
   HeaderWrapper,
@@ -7,10 +12,6 @@ import {
   MenuBurger,
   LineMenuBurger,
 } from './Header.styles'
-import Link from 'next/link'
-import { useRouter } from 'next/dist/client/router'
-import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 const Header = (): JSX.Element => {
   const router = useRouter()

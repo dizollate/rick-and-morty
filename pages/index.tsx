@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+
 import { WithLayout } from '../HOC/Layout'
 import { WrapperHome } from '../styles/HomePage/home.style'
 import ImageBox from '../Components/Organisms/ImageBox/ImageBox'

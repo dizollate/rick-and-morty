@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
+
 import { getCharacters } from 'rickmortyapi'
+import { motion } from 'framer-motion'
+
 import { WithLayout } from '../../HOC/Layout'
 import {
   WrapperCharacters,
@@ -10,7 +13,7 @@ import {
   ResetButton,
 } from '../../styles/Charactets/Characters.styles'
 import { ICharacter, IInfo } from '../../interfaces/CharactersInterfaces'
-import { motion } from 'framer-motion'
+
 import {
   optionsSortingByGender,
   optionsSortingByStatus,

@@ -1,6 +1,9 @@
-import { useRouter } from 'next/dist/client/router'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/dist/client/router'
 import { getCharacter, getEpisode } from 'rickmortyapi'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Episode } from 'rickmortyapi/dist/interfaces'
+
 import { WithLayout } from '../../HOC/Layout'
 import { ICharacter } from '../../interfaces/CharactersInterfaces'
 import {
@@ -24,8 +27,6 @@ import {
   WrapperStatus,
 } from '../../styles/Character/Character.style'
 import { pageNumberFromString } from '../../helpers/pageNumberString'
-import { Episode } from 'rickmortyapi/dist/interfaces'
-import { AnimatePresence, motion } from 'framer-motion'
 
 const Character = () => {
   const router = useRouter()

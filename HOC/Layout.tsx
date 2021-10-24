@@ -1,5 +1,6 @@
-import { useRouter } from 'next/dist/client/router'
 import { FunctionComponent, useRef } from 'react'
+import { useRouter } from 'next/dist/client/router'
+
 import Footer from './Footer/Footer'
 import Header from './Header/Header'
 import { ILayout } from './Layout.props'
