@@ -10,9 +10,23 @@ import {
   WrapperContent,
   ImageCharacterWrapper,
 } from './CharacterBox.style'
+import { useCallback, useEffect, useState } from 'react'
 
 const CharacterBox = ({ item }: CharacterBoxProps): JSX.Element => {
   const router = useRouter()
+  const [weigthScreen, setWeigthScreen] = useState<number>(window.innerWidth)
+
+  const handleWindowResize = useCallback(() => {
+    setWeigthScreen(window.innerWidth)
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('resize', handleWindowResize)
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize)
+    }
+  }, [handleWindowResize])
 
   const itemAnimation = {
     opened: {
@@ -39,9 +53,19 @@ const CharacterBox = ({ item }: CharacterBoxProps): JSX.Element => {
         }, 500)
       }}
     >
-      <ImageCharacterWrapper>
-        <ImageCharacter src={item.image} alt={`avatar of ${item.name}`} />
-      </ImageCharacterWrapper>
+      {weigthScreen && (
+        <ImageCharacterWrapper>
+          <ImageCharacter
+            src={item.image}
+            alt={`avatar of ${item.name}`}
+            width={weigthScreen > 510 ? '100%' : '200px'}
+            height={weigthScreen > 510 ? '100%' : '200px'}
+            layout={weigthScreen > 510 ? 'responsive' : 'fixed'}
+            objectFit="cover"
+            priority={true}
+          />
+        </ImageCharacterWrapper>
+      )}
 
       <WrapperContent>
         <NameCharacter>{item.name}</NameCharacter>

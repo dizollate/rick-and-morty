@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 
 export const CharacterBoxWrapper = styled.div`
   width: 48%;
@@ -30,7 +31,7 @@ export const CharacterBoxWrapper = styled.div`
   }
 `
 
-export const ImageCharacter = styled.img`
+export const ImageCharacter = styled(Image)`
   border-radius: 15px;
   width: 100%;
   object-fit: cover;

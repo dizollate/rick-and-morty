@@ -31,7 +31,7 @@ const ImageBox = ({ item }: ImageBoxProps): JSX.Element => {
       onClick={() => onNewPage(item._id)}
     >
       <WrapperImageHome>
-        <MockImage src={item.photo} alt="mock" />
+        <MockImage src={item.photo} alt="mock" loading="lazy" />
       </WrapperImageHome>
       <ContentBoxText>{item.title}</ContentBoxText>
       <ContextSubTitle>{item.text}</ContextSubTitle>

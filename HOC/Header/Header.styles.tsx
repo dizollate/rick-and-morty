@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 
 export const HeaderStyles = styled.header`
   width: 100%;
@@ -21,7 +22,7 @@ export const HeaderWrapper = styled.header`
   justify-content: space-between;
 `
 
-export const LogoImage = styled.img`
+export const LogoImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
